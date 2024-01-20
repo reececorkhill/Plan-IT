@@ -1,5 +1,4 @@
 $( document ).ready(function() {
-    console.log( "ready!" );
 
     // Global Variables
     var today = dayjs();
@@ -44,5 +43,5 @@ $( document ).ready(function() {
         },
     ];
 
-    console.log(today);
+    $("#currentDay").text(today.format("[Today is:] dddd[,] MMMM D"));
 });
