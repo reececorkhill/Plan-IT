@@ -49,14 +49,29 @@ $( document ).ready(function() {
     function dailyTimeblocks (hours) { // Function to display the timeblocks (Passed in workingDayHours array --> hours).
         for (var i = 0; i < hours.length; i++) { // Iterate through the array.
 
+            var timeblockRow = $("<div>");
+            timeblockRow.addClass("row");
+
             var hourSlot = $("<div>"); // Setting a variable to create a div.
-            hourSlot.addClass("hour"); // Giving each hourSlot div the class 'hour'.
+            hourSlot.addClass("hour col-1"); // Giving each hourSlot div the class 'hour'.
             hourSlot.text(hours[i].hour); // Giving each hourSlot div an hour from an object in the workingDayHours array.
-            $(".container").append(hourSlot); // Appending each hourSlot div to the timeblocks container.
-        
+            timeblockRow.append(hourSlot); // Appending each hourSlot div to the timeblocks container.
+
+            var userTask = $("<textarea>"); // Setting a variable to create a textarea.
+            userTask.addClass("description col");
+            timeblockRow.append(userTask); // Appending userTask textarea to the timeblocks container.
+            
+            var saveTask = $("<button>"); // Setting a variable to create a button.
+            saveTask.addClass("saveBtn col-1"); // Giving each save button the class 'saveBtn'.
+            timeblockRow.append(saveTask); // Appending saveTask button to the timeblocks container.
+
+            $(".container").append(timeblockRow);
+
         };
     }
     dailyTimeblocks(workingDayHours);
 
 
 });
+
+// $(".container")
