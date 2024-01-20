@@ -2,7 +2,6 @@ $( document ).ready(function() {
 
     // Global Variables
     var today = dayjs();
-    var timeblocksCtn = document.getElementsByClassName(".container"); // Getting the timeblocks container.
     var workingDayHours = [ // Array of objects holding the timeblock hours.
         {
             hour: "9AM", // [0]
@@ -49,29 +48,26 @@ $( document ).ready(function() {
     function dailyTimeblocks (hours) { // Function to display the timeblocks (Passed in workingDayHours array --> hours).
         for (var i = 0; i < hours.length; i++) { // Iterate through the array.
 
-            var timeblockRow = $("<div>");
-            timeblockRow.addClass("row");
+            var timeblockRow = $("<div>"); // Setting a variable to create a div.
+            timeblockRow.addClass("row"); // Giving each timeblockRow div the class 'row'.
 
             var hourSlot = $("<div>"); // Setting a variable to create a div.
-            hourSlot.addClass("hour col-1"); // Giving each hourSlot div the class 'hour'.
+            hourSlot.addClass("hour col-1"); // Giving each hourSlot div the class 'hour' and 'col-1'.
             hourSlot.text(hours[i].hour); // Giving each hourSlot div an hour from an object in the workingDayHours array.
-            timeblockRow.append(hourSlot); // Appending each hourSlot div to the timeblocks container.
+            timeblockRow.append(hourSlot); // Appending each hourSlot div to the timeblockRow div.
 
             var userTask = $("<textarea>"); // Setting a variable to create a textarea.
-            userTask.addClass("description col");
-            timeblockRow.append(userTask); // Appending userTask textarea to the timeblocks container.
+            userTask.addClass("description col"); // Giving each userTask textarea the class 'description' and 'col'.
+            timeblockRow.append(userTask); // Appending userTask textarea to the timeblockRow div.
             
             var saveTask = $("<button>"); // Setting a variable to create a button.
-            saveTask.addClass("saveBtn col-1"); // Giving each save button the class 'saveBtn'.
-            timeblockRow.append(saveTask); // Appending saveTask button to the timeblocks container.
+            saveTask.addClass("saveBtn col-1"); // Giving each save button the class 'saveBtn' and 'col-1'.
+            timeblockRow.append(saveTask); // Appending saveTask button to the timeblockRow div.
 
-            $(".container").append(timeblockRow);
+            $(".container").append(timeblockRow); // Appending each timeblockRow div to the timeblocks container.
 
         };
     }
     dailyTimeblocks(workingDayHours);
 
-
 });
-
-// $(".container")
