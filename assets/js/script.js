@@ -2,9 +2,8 @@ $( document ).ready(function() {
 
     // Global Variables
     var today = dayjs();
-    var currentDate = document.getElementById("#currentDay"); // Getting the currentDay element.
     var timeblocksCtn = document.getElementsByClassName(".container"); // Getting the timeblocks container.
-    var workingDay = [
+    var workingDay = [ // Array of objects holding the timeblock hours.
         {
             hour: "9AM", // [0]
             task: "", // [1]
@@ -43,5 +42,7 @@ $( document ).ready(function() {
         },
     ];
 
-    $("#currentDay").text(today.format("[Today is:] dddd[,] MMMM D"));
+    // Displaying Date
+    $("#currentDay").text(today.format("[Today is:] dddd[,] MMMM D")); // Getting currentDay element and displaying Day, Month and Date.
+
 });
