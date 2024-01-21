@@ -8,6 +8,51 @@ $( document ).ready(function() {
     var currentHour = dayjs();
     var workingDayHours = [ // Array of objects holding the timeblock hours.
         {
+            hourInt: 0, // [0]
+            hour: "12AM", // [1]
+            task: "", // [2]
+        },
+        {
+            hourInt: 01, // [0]
+            hour: "1AM", // [1]
+            task: "", // [2]
+        },
+        {
+            hourInt: 02, // [0]
+            hour: "2AM", // [1]
+            task: "", // [2]
+        },
+        {
+            hourInt: 03, // [0]
+            hour: "3AM", // [1]
+            task: "", // [2]
+        },
+        {
+            hourInt: 04, // [0]
+            hour: "4AM", // [1]
+            task: "", // [2]
+        },
+        {
+            hourInt: 05, // [0]
+            hour: "5AM", // [1]
+            task: "", // [2]
+        },
+        {
+            hourInt: 06, // [0]
+            hour: "6AM", // [1]
+            task: "", // [2]
+        },
+        {
+            hourInt: 07, // [0]
+            hour: "7AM", // [1]
+            task: "", // [2]
+        },
+        {
+            hourInt: 08, // [0]
+            hour: "8AM", // [1]
+            task: "", // [2]
+        },
+        {
             hourInt: 09, // [0]
             hour: "9AM", // [1]
             task: "", // [2]
@@ -50,6 +95,36 @@ $( document ).ready(function() {
         {
             hourInt: 17, // [0]
             hour: "5PM", // [1]
+            task: "", // [2]
+        },
+        {
+            hourInt: 18, // [0]
+            hour: "6PM", // [1]
+            task: "", // [2]
+        },
+        {
+            hourInt: 19, // [0]
+            hour: "7PM", // [1]
+            task: "", // [2]
+        },
+        {
+            hourInt: 20, // [0]
+            hour: "8PM", // [1]
+            task: "", // [2]
+        },
+        {
+            hourInt: 21, // [0]
+            hour: "9PM", // [1]
+            task: "", // [2]
+        },
+        {
+            hourInt: 22, // [0]
+            hour: "10PM", // [1]
+            task: "", // [2]
+        },
+        {
+            hourInt: 23, // [0]
+            hour: "11PM", // [1]
             task: "", // [2]
         },
     ];
