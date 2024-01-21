@@ -86,11 +86,11 @@ $( document ).ready(function() {
 
     function presentHour () { // Function to change the class of a timeblockRow's textarea based on the hour matching the current time.
         var currentHourNumber = currentHour.format("HH"); // Gets the time (non-ordinal).
-        console.log(typeof(currentHourNumber))
-        console.log(currentHourNumber)
+        // console.log(typeof(currentHourNumber))
+        // console.log(currentHourNumber)
         var currentHourInt = parseInt(currentHourNumber);
-        console.log(typeof(currentHourInt));
-        console.log(currentHourInt)
+        // console.log(typeof(currentHourInt));
+        // console.log(currentHourInt)
 
         for (var i = 0; i < workingDayHours.length; i++) {
             if (workingDayHours[i].hourInt === currentHourInt) {
@@ -123,4 +123,24 @@ $( document ).ready(function() {
         };
     }
     pastHour();
+
+    function futureHour () { // Function to change the class of a timeblockRow's textarea based on the hour matching the current time.
+        var currentHourNumber = currentHour.format("HH"); // Gets the time (non-ordinal).
+        // console.log(typeof(currentHourNumber))
+        // console.log(currentHourNumber)
+        var currentHourInt = parseInt(currentHourNumber);
+        // console.log(typeof(currentHourInt));
+        // console.log(currentHourInt)
+
+        for (var i = 0; i < workingDayHours.length; i++) {
+            if (workingDayHours[i].hourInt > currentHourInt) {
+                // console.log("We have a match!")
+                // console.log(workingDayHours[i].hourInt)
+                // console.log(currentHourInt)
+                var matchingUserTask = $("[data-index='" + workingDayHours[i].hourInt + "']"); // Select the userTask textarea with the matching data-index.
+                matchingUserTask.addClass("future"); // Add the "future" class to the matching textarea.
+            };
+        };
+    }
+    futureHour();
 });
