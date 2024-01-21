@@ -74,4 +74,7 @@ $( document ).ready(function() {
     }
     dailyTimeblocks(workingDayHours);
 
+    function presentHour () { // Function to change the class of a timeblockRow's textarea based on the hour matching the current time.
+
+    } 
 });
