@@ -47,7 +47,7 @@ $( document ).ready(function() {
 
     // Displaying Date
     $("#currentDay").text(today.format("[Today is:] dddd[,] MMMM Do")); // Getting currentDay element and displaying Day, Month and Date.
-    $("#currentDay").text(currentHour.format("[Time is:] h A"));
+    $("#currentDay").text(currentHour.format("[Time is:] hA")); // Getting currentHour and displaying it as X AM/PM.
     
     // Timeblocks
     function dailyTimeblocks (hours) { // Function to display the timeblocks (Passed in workingDayHours array --> hours).
@@ -70,7 +70,6 @@ $( document ).ready(function() {
             timeblockRow.append(saveTask); // Appending saveTask button to the timeblockRow div.
 
             $(".container").append(timeblockRow); // Appending each timeblockRow div to the timeblocks container.
-
         };
     }
     dailyTimeblocks(workingDayHours);
