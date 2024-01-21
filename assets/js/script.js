@@ -1,5 +1,8 @@
 $( document ).ready(function() {
 
+    // Loads the dayJS advanced format plugin.
+    dayjs.extend(window.dayjs_plugin_advancedFormat)
+    
     // Global Variables
     var today = dayjs();
     var workingDayHours = [ // Array of objects holding the timeblock hours.
