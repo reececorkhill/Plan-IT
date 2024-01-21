@@ -1,12 +1,12 @@
 $( document ).ready(function() {
 
-    // Loads the dayJS advanced format plugin.
+    // Loading dayJS advanced format plugin.
     dayjs.extend(window.dayjs_plugin_advancedFormat)
 
-    // Global Variables
-    var today = dayjs();
-    var currentHour = dayjs();
-    var workingDayHours = [ // Array of objects holding the timeblock hours.
+    // Setting Global Variables
+    var today = dayjs();                                                                            // Variable for today which uses dayJS to get current day.
+    var currentHour = dayjs();                                                                      // Variable for current hour which uses dayJS to get current hour.
+    var workingDayHours = [                                                                         // Array of objects holding the timeblock hours.
         {
             hourInt: 0, // [0]
             hour: "12AM", // [1]
@@ -130,92 +130,71 @@ $( document ).ready(function() {
     ];
 
     // Displaying Date
-    $("#currentDay").text(today.format("[Today is:] dddd[,] MMMM Do")); // Getting currentDay element and displaying Day, Month and Date.
-    $("#currentDay").text(currentHour.format("[Current hour:] HH[:00]")); // Getting currentHour and displaying it as X AM/PM.
+    $("#currentDay").text(today.format("[Today is:] dddd[,] MMMM Do"));                             // Getting currentDay element and displaying Day, Month and Date.
+    $("#currentDay").text(currentHour.format("[Current hour:] HH[:00]"));                           // Getting currentHour and displaying it as 2-digits with formatting.
     
     // Timeblocks
-    function dailyTimeblocks (hours) { // Function to display the timeblocks (Passed in workingDayHours array --> hours).
-        for (var i = 0; i < hours.length; i++) { // Iterate through the array.
+    function dailyTimeblocks (hours) {                                                              // Function to display the timeblocks (Passed in workingDayHours array --> hours).
+        for (var i = 0; i < hours.length; i++) {                                                    // Iterate through the array.
 
-            var timeblockRow = $("<div>"); // Setting a variable to create a div.
-            timeblockRow.addClass("row"); // Giving each timeblockRow div the class 'row'.
+            var timeblockRow = $("<div>");                                                          // Setting a variable to create a div.
+            timeblockRow.addClass("row");                                                           // Giving each timeblockRow div the class 'row'.
 
-            var hourSlot = $("<div>"); // Setting a variable to create a div.
-            hourSlot.addClass("hour col-1"); // Giving each hourSlot div the class 'hour' and 'col-1'.
-            hourSlot.text(hours[i].hour); // Giving each hourSlot div an hour from an object in the workingDayHours array.
-            timeblockRow.append(hourSlot); // Appending each hourSlot div to the timeblockRow div.
+            var hourSlot = $("<div>");                                                              // Setting a variable to create a div.
+            hourSlot.addClass("hour col-1");                                                        // Giving each hourSlot div the class 'hour' and 'col-1'.
+            hourSlot.text(hours[i].hour);                                                           // Giving each hourSlot div an hour from an object in the workingDayHours array.
+            timeblockRow.append(hourSlot);                                                          // Appending each hourSlot div to the timeblockRow div.
 
-            var userTask = $("<textarea>"); // Setting a variable to create a textarea.
-            userTask.addClass("description col"); // Giving each userTask textarea the class 'description' and 'col'.
-            userTask.attr("data-index", hours[i].hourInt);
-            timeblockRow.append(userTask); // Appending userTask textarea to the timeblockRow div.
+            var userTask = $("<textarea>");                                                         // Setting a variable to create a textarea.
+            userTask.addClass("description col");                                                   // Giving each userTask textarea the class 'description' and 'col'.
+            userTask.attr("data-index", hours[i].hourInt);                                          // Giving each textatea the attribute 'data-index' and the value of the current indexes hourInt.
+            timeblockRow.append(userTask);                                                          // Appending userTask textarea to the timeblockRow div.
             
-            var saveTask = $("<button>"); // Setting a variable to create a button.
-            saveTask.addClass("saveBtn col-1"); // Giving each save button the class 'saveBtn' and 'col-1'.
-            timeblockRow.append(saveTask); // Appending saveTask button to the timeblockRow div.
+            var saveTask = $("<button>");                                                           // Setting a variable to create a button.
+            saveTask.addClass("saveBtn col-1");                                                     // Giving each save button the class 'saveBtn' and 'col-1'.
+            timeblockRow.append(saveTask);                                                          // Appending saveTask button to the timeblockRow div.
 
-            $(".container").append(timeblockRow); // Appending each timeblockRow div to the timeblocks container.
+            $(".container").append(timeblockRow);                                                   // Appending each timeblockRow div to the timeblocks container.
         };
     }
-    dailyTimeblocks(workingDayHours);
+    dailyTimeblocks(workingDayHours);                                                               // Calling the dailyTimeblocks function.
 
-    function presentHour () { // Function to change the class of a timeblockRow's textarea based on the hour matching the current time.
-        var currentHourNumber = currentHour.format("HH"); // Gets the time (non-ordinal).
-        // console.log(typeof(currentHourNumber))
-        // console.log(currentHourNumber)
-        var currentHourInt = parseInt(currentHourNumber);
-        // console.log(typeof(currentHourInt));
-        // console.log(currentHourInt)
+    function presentHour () {                                                                       // Function to change the class of a timeblockRow's textarea based on the hour matching the current time.
+        var currentHourNumber = currentHour.format("HH");                                           // Gets the hour as 2-digit format.
+        var currentHourInt = parseInt(currentHourNumber);                                           // Parsing the currentHourNumber as an integer and setting it as the currentHourInt variable.
 
-        for (var i = 0; i < workingDayHours.length; i++) {
-            if (workingDayHours[i].hourInt === currentHourInt) {
-                // console.log("We have a match!")
-                // console.log(workingDayHours[i].hourInt)
-                // console.log(currentHourInt)
-                var matchingUserTask = $("[data-index='" + workingDayHours[i].hourInt + "']"); // Select the userTask textarea with the matching data-index.
-                matchingUserTask.addClass("present"); // Add the "present" class to the matching textarea.
+        for (var i = 0; i < workingDayHours.length; i++) {                                          // Iterate through the array.
+            if (workingDayHours[i].hourInt === currentHourInt) {                                    // Checking if the current workingDayHours index hourInt number is strictly equal to the current hour.
+                var matchingUserTask = $("[data-index='" + workingDayHours[i].hourInt + "']");      // Selecting the userTask textarea with the matching data-index.
+                matchingUserTask.addClass("present");                                               // Add the "present" class to the matching textarea.
             };
         };
     }
-    presentHour(); 
+    presentHour();                                                                                  // Calling the presentHour function.
 
-    function pastHour () { // Function to change the class of a timeblockRow's textarea based on the hour matching the current time.
-        var currentHourNumber = currentHour.format("HH"); // Gets the time (non-ordinal).
-        // console.log(typeof(currentHourNumber))
-        // console.log(currentHourNumber)
-        var currentHourInt = parseInt(currentHourNumber);
-        // console.log(typeof(currentHourInt));
-        // console.log(currentHourInt)
+    function pastHour () {                                                                          // Function to change the class of a timeblockRow's textarea based on the hour being lower than the current time.
+        var currentHourNumber = currentHour.format("HH");                                           // Gets the hour as 2-digit format.
+        var currentHourInt = parseInt(currentHourNumber);                                           // Parsing the currentHourNumber as an integer and setting it as the currentHourInt variable.
 
-        for (var i = 0; i < workingDayHours.length; i++) {
-            if (workingDayHours[i].hourInt < currentHourInt) {
-                // console.log("We have a match!")
-                // console.log(workingDayHours[i].hourInt)
-                // console.log(currentHourInt)
-                var matchingUserTask = $("[data-index='" + workingDayHours[i].hourInt + "']"); // Select the userTask textarea with the matching data-index.
-                matchingUserTask.addClass("past"); // Add the "past" class to the matching textarea.
+        for (var i = 0; i < workingDayHours.length; i++) {                                          // Iterate through the array.
+            if (workingDayHours[i].hourInt < currentHourInt) {                                      // Checking if the current workingDayHours index hourInt number is less than the current hour.
+                var matchingUserTask = $("[data-index='" + workingDayHours[i].hourInt + "']");      // Select the userTask textarea with the matching data-index.
+                matchingUserTask.addClass("past");                                                  // Add the "past" class to the matching textarea.
             };
         };
     }
-    pastHour();
+    pastHour();                                                                                     // Calling the pastHour function.
 
-    function futureHour () { // Function to change the class of a timeblockRow's textarea based on the hour matching the current time.
-        var currentHourNumber = currentHour.format("HH"); // Gets the time (non-ordinal).
-        // console.log(typeof(currentHourNumber))
-        // console.log(currentHourNumber)
-        var currentHourInt = parseInt(currentHourNumber);
-        // console.log(typeof(currentHourInt));
-        // console.log(currentHourInt)
+    function futureHour () {                                                                        // Function to change the class of a timeblockRow's textarea based on the hour being greater than the current time.
+        var currentHourNumber = currentHour.format("HH");                                           // Gets the hour as 2-digit format.
+        var currentHourInt = parseInt(currentHourNumber);                                           // Parsing the currentHourNumber as an integer and setting it as the currentHourInt variable.
 
-        for (var i = 0; i < workingDayHours.length; i++) {
-            if (workingDayHours[i].hourInt > currentHourInt) {
-                // console.log("We have a match!")
-                // console.log(workingDayHours[i].hourInt)
-                // console.log(currentHourInt)
-                var matchingUserTask = $("[data-index='" + workingDayHours[i].hourInt + "']"); // Select the userTask textarea with the matching data-index.
-                matchingUserTask.addClass("future"); // Add the "future" class to the matching textarea.
+        for (var i = 0; i < workingDayHours.length; i++) {                                          // Iterate through the array.
+            if (workingDayHours[i].hourInt > currentHourInt) {                                      // Checking if the current workingDayHours index hourInt number is greater than the current hour.
+                var matchingUserTask = $("[data-index='" + workingDayHours[i].hourInt + "']");      // Select the userTask textarea with the matching data-index.
+                matchingUserTask.addClass("future");                                                // Add the "future" class to the matching textarea.
             };
         };
     }
-    futureHour();
+    futureHour();                                                                                   // Calling the futureHour function.
 });
