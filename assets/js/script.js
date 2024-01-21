@@ -8,40 +8,49 @@ $( document ).ready(function() {
     var currentHour = dayjs();
     var workingDayHours = [ // Array of objects holding the timeblock hours.
         {
-            hour: "9AM", // [0]
-            task: "", // [1]
+            hourInt: 9, // [0]
+            hour: "9AM", // [1]
+            task: "", // [2]
         },
         {
-            hour: "10AM", // [0]
-            task: "", // [1]
+            hourInt: 10, // [0]
+            hour: "10AM", // [1]
+            task: "", // [2]
         },
         {
-            hour: "11AM", // [0]
-            task: "", // [1]
+            hourInt: 11, // [0]
+            hour: "11AM", // [1]
+            task: "", // [2]
         },
         {
-            hour: "12PM", // [0]
-            task: "", // [1]
+            hourInt: 12, // [0]
+            hour: "12PM", // [1]
+            task: "", // [2]
         },
         {
-            hour: "1PM", // [0]
-            task: "", // [1]
+            hourInt: 1, // [0]
+            hour: "1PM", // [1]
+            task: "", // [2]
         },
         {
-            hour: "2PM", // [0]
-            task: "", // [1]
+            hourInt: 2, // [0]
+            hour: "2PM", // [1]
+            task: "", // [2]
         },
         {
-            hour: "3PM", // [0]
-            task: "", // [1]
+            hourInt: 3, // [0]
+            hour: "3PM", // [1]
+            task: "", // [2]
         },
         {
-            hour: "4PM", // [0]
-            task: "", // [1]
+            hourInt: 4, // [0]
+            hour: "4PM", // [1]
+            task: "", // [2]
         },
         {
-            hour: "5PM", // [0]
-            task: "", // [1]
+            hourInt: 5, // [0]
+            hour: "5PM", // [1]
+            task: "", // [2]
         },
     ];
 
@@ -63,6 +72,7 @@ $( document ).ready(function() {
 
             var userTask = $("<textarea>"); // Setting a variable to create a textarea.
             userTask.addClass("description col"); // Giving each userTask textarea the class 'description' and 'col'.
+            userTask.attr("data-index", hours[i].hour);
             timeblockRow.append(userTask); // Appending userTask textarea to the timeblockRow div.
             
             var saveTask = $("<button>"); // Setting a variable to create a button.
@@ -75,6 +85,22 @@ $( document ).ready(function() {
     dailyTimeblocks(workingDayHours);
 
     function presentHour () { // Function to change the class of a timeblockRow's textarea based on the hour matching the current time.
+        var currentHourNumber = currentHour.format("h"); // Gets the time (non-ordinal).
+        // console.log(typeof(currentHourNumber))
+        // console.log(currentHourNumber)
+        var currentHourInt = parseInt(currentHourNumber);
+        // console.log(typeof(currentHourInt));
+        // console.log(currentHourInt)
 
-    } 
+        for (var i = 0; i < workingDayHours.length; i++) {
+            if (workingDayHours[i].hourInt === currentHourInt) {
+                // console.log("We have a match!")
+                // console.log(workingDayHours[i].hourInt)
+                // console.log(currentHourInt)
+                var matchingUserTask = $("[data-index='" + workingDayHours[i].hour + "']"); // Select the userTask textarea with the matching data-index.
+                matchingUserTask.addClass("present"); // Add the "present" class to the matching textarea.
+            };
+        };
+    }
+    presentHour(); 
 });
