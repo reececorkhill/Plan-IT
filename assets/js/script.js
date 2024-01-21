@@ -5,6 +5,7 @@ $( document ).ready(function() {
 
     // Global Variables
     var today = dayjs();
+    var currentHour = dayjs();
     var workingDayHours = [ // Array of objects holding the timeblock hours.
         {
             hour: "9AM", // [0]
@@ -46,6 +47,7 @@ $( document ).ready(function() {
 
     // Displaying Date
     $("#currentDay").text(today.format("[Today is:] dddd[,] MMMM Do")); // Getting currentDay element and displaying Day, Month and Date.
+    $("#currentDay").text(currentHour.format("[Time is:] h A"));
     
     // Timeblocks
     function dailyTimeblocks (hours) { // Function to display the timeblocks (Passed in workingDayHours array --> hours).
