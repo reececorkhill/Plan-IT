@@ -103,4 +103,24 @@ $( document ).ready(function() {
         };
     }
     presentHour(); 
+
+    function pastHour () { // Function to change the class of a timeblockRow's textarea based on the hour matching the current time.
+        var currentHourNumber = currentHour.format("h"); // Gets the time (non-ordinal).
+        // console.log(typeof(currentHourNumber))
+        // console.log(currentHourNumber)
+        var currentHourInt = parseInt(currentHourNumber);
+        // console.log(typeof(currentHourInt));
+        // console.log(currentHourInt)
+
+        for (var i = 0; i < workingDayHours.length; i++) {
+            if (workingDayHours[i].hourInt != currentHourInt) {
+                // console.log("We have a match!")
+                // console.log(workingDayHours[i].hourInt)
+                // console.log(currentHourInt)
+                var matchingUserTask = $("[data-index='" + workingDayHours[i].hour + "']"); // Select the userTask textarea with the matching data-index.
+                matchingUserTask.addClass("past"); // Add the "present" class to the matching textarea.
+            };
+        };
+    }
+    pastHour();
 });
