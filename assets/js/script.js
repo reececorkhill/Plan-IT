@@ -2,7 +2,7 @@ $( document ).ready(function() {
 
     // Loads the dayJS advanced format plugin.
     dayjs.extend(window.dayjs_plugin_advancedFormat)
-    
+
     // Global Variables
     var today = dayjs();
     var workingDayHours = [ // Array of objects holding the timeblock hours.
@@ -45,7 +45,7 @@ $( document ).ready(function() {
     ];
 
     // Displaying Date
-    $("#currentDay").text(today.format("[Today is:] dddd[,] MMMM D")); // Getting currentDay element and displaying Day, Month and Date.
+    $("#currentDay").text(today.format("[Today is:] dddd[,] MMMM Do")); // Getting currentDay element and displaying Day, Month and Date.
     
     // Timeblocks
     function dailyTimeblocks (hours) { // Function to display the timeblocks (Passed in workingDayHours array --> hours).
