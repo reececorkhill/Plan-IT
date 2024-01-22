@@ -130,8 +130,9 @@ $( document ).ready(function() {
             userTask.attr("data-index", hours[i].hourInt);                                          // Giving each textatea the attribute 'data-index' and the value of the current indexes hourInt.
             timeblockRow.append(userTask);                                                          // Appending userTask textarea to the timeblockRow div.
             
-            var saveTask = $("<button>");                                                           // Setting a variable to create a button.
-            saveTask.addClass("saveBtn col-1");                                                     // Giving each save button the class 'saveBtn' and 'col-1'.
+            var saveTask = $("<button><i>");                                                        // Setting a variable to create a button with icon.
+            saveTask.addClass("saveBtn col-1 fas fa-save fa-2x");                                   // Giving each save button the class 'saveBtn' and 'col-1' and fontawesome classes for the icon.
+            saveTask.css("color:#ffffff")
             timeblockRow.append(saveTask);                                                          // Appending saveTask button to the timeblockRow div.
 
             $(".container").append(timeblockRow);                                                   // Appending each timeblockRow div to the timeblocks container.
