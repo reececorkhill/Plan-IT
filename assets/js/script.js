@@ -128,10 +128,14 @@ $( document ).ready(function() {
             task: "", // [2]
         },
     ];
+    var hourDisplayPara = $("<p>");
+    hourDisplayPara.addClass("currentHour");
+    $("header").append(hourDisplayPara);
 
     // Displaying Date
+    var hourDisplayPara = $("<p>");
     $("#currentDay").text(today.format("[Today is:] dddd[,] MMMM Do"));                             // Getting currentDay element and displaying Day, Month and Date.
-    $("#currentDay").text(currentHour.format("[Current hour:] HH[:00]"));                           // Getting currentHour and displaying it as 2-digits with formatting.
+    $(".currentHour").text(currentHour.format("[Current hour:] HH[:00]"));                           // Getting currentHour and displaying it as 2-digits with formatting.
     
     // Timeblocks
     function dailyTimeblocks (hours) {                                                              // Function to display the timeblocks (Passed in workingDayHours array --> hours).
