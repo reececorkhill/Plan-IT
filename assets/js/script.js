@@ -10,132 +10,108 @@ $( document ).ready(function() {
         {
             hourInt: 0, // [0]
             hour: "12AM", // [1]
-            task: "", // [2]
         },
         {
             hourInt: 1, // [0]
             hour: "1AM", // [1]
-            task: "", // [2]
         },
         {
             hourInt: 2, // [0]
             hour: "2AM", // [1]
-            task: "", // [2]
         },
         {
             hourInt: 3, // [0]
             hour: "3AM", // [1]
-            task: "", // [2]
         },
         {
             hourInt: 4, // [0]
             hour: "4AM", // [1]
-            task: "", // [2]
         },
         {
             hourInt: 5, // [0]
             hour: "5AM", // [1]
-            task: "", // [2]
         },
         {
             hourInt: 6, // [0]
             hour: "6AM", // [1]
-            task: "", // [2]
         },
         {
             hourInt: 7, // [0]
             hour: "7AM", // [1]
-            task: "", // [2]
         },
         {
             hourInt: 8, // [0]
             hour: "8AM", // [1]
-            task: "", // [2]
         },
         {
             hourInt: 9, // [0]
             hour: "9AM", // [1]
-            task: "", // [2]
         },
         {
             hourInt: 10, // [0]
             hour: "10AM", // [1]
-            task: "", // [2]
         },
         {
             hourInt: 11, // [0]
             hour: "11AM", // [1]
-            task: "", // [2]
         },
         {
             hourInt: 12, // [0]
             hour: "12PM", // [1]
-            task: "", // [2]
         },
         {
             hourInt: 13, // [0]
             hour: "1PM", // [1]
-            task: "", // [2]
         },
         {
             hourInt: 14, // [0]
             hour: "2PM", // [1]
-            task: "", // [2]
         },
         {
             hourInt: 15, // [0]
             hour: "3PM", // [1]
-            task: "", // [2]
         },
         {
             hourInt: 16, // [0]
             hour: "4PM", // [1]
-            task: "", // [2]
         },
         {
             hourInt: 17, // [0]
             hour: "5PM", // [1]
-            task: "", // [2]
         },
         {
             hourInt: 18, // [0]
             hour: "6PM", // [1]
-            task: "", // [2]
         },
         {
             hourInt: 19, // [0]
             hour: "7PM", // [1]
-            task: "", // [2]
         },
         {
             hourInt: 20, // [0]
             hour: "8PM", // [1]
-            task: "", // [2]
         },
         {
             hourInt: 21, // [0]
             hour: "9PM", // [1]
-            task: "", // [2]
         },
         {
             hourInt: 22, // [0]
             hour: "10PM", // [1]
-            task: "", // [2]
         },
         {
             hourInt: 23, // [0]
             hour: "11PM", // [1]
-            task: "", // [2]
         },
     ];
-    var hourDisplayPara = $("<p>");
-    hourDisplayPara.addClass("currentHour");
-    $("header").append(hourDisplayPara);
+    var hourDisplayPara = $("<p>");                                                                 // Declaring a variable which will create a <p> element.
+    hourDisplayPara.addClass("currentHour");                                                        // Adding the class "currentHour" to the <p> element.
+    $("header").append(hourDisplayPara);                                                            // Appending the <p> element to the header.
 
     // Displaying Date
     var hourDisplayPara = $("<p>");
     $("#currentDay").text(today.format("[Today is:] dddd[,] MMMM Do"));                             // Getting currentDay element and displaying Day, Month and Date.
-    $(".currentHour").text(currentHour.format("[Current hour:] HH[:00]"));                           // Getting currentHour and displaying it as 2-digits with formatting.
+    $(".currentHour").text(currentHour.format("[Current hour:] HH[:00]"));                          // Getting currentHour and displaying it as 2-digits with formatting in the currentHour <p> element.
     
     // Timeblocks
     function dailyTimeblocks (hours) {                                                              // Function to display the timeblocks (Passed in workingDayHours array --> hours).
@@ -205,12 +181,25 @@ $( document ).ready(function() {
     function saveTaskEntry() {                                                                      // Function to save the users task to local storage.
         var clickedButton = $(this);                                                                // The clicked saveBtn.
         var correspondingTextarea = clickedButton.closest(".row").find("textarea");                 // Finding the textarea in the same row as the clicked button.
+        var correspondingTime = clickedButton.closest(".row").find("div");                          // Finding the div which holds the time in the same row as the clicked button.
+        var existingUserTasks = JSON.parse(localStorage.getItem("userTasks"));                      // Declaring a new variable which gets userTasks from localstorage and parses it.
 
-        if (correspondingTextarea.val().trim() !== "") {                                            // Checking that the user has entered something in the textarea of the corresponding button.
-            console.log(correspondingTextarea.val());
+        if (correspondingTextarea.val().trim() !== "") {                                            // Checking that the user has entered something in the textarea of the corresponding button, removes whitespace.
+            var taskText = correspondingTextarea.val();                                             // Declaring a new variable which gets the value of the textarea.
+            console.log(taskText);
+            var taskTime = correspondingTime.text();                                                // Declaring a new variable which gets the text inside of the time div.
+            console.log(taskTime);
+            var taskListItems = {taskTime, taskText};                                               // Declaring a new variable which holds the taskTime and taskText in an object.
+            console.log(taskListItems);
         } else {                                                                                    // If the user has not entered anything in the textarea of the corresponding button.
-            console.log("Textarea is empty!");
-        }
+            alert("This task is empty, please enter a task and try again!");                        // Alert to advise the user they must enter something in the text area to save.
+        };
+
+        if (!existingUserTasks) {                                                                   // If existingUserTasks is falsy.
+            existingUserTasks = [];                                                                 // Set existingUserTasks to an empty array.
+        };
+        var newTasks = [...existingUserTasks, taskListItems];                                       // Creates newTasks array by spreading the elements of existingUserTasks and adding taskListItems to the end.
+        localStorage.setItem("userTasks", JSON.stringify(newTasks));                                // Converts newTasks to a string and stores it in local storage with the key "userTasks".
     }
     $(".saveBtn").click(saveTaskEntry);                                                             // Calling the saveTaskEntry function when a save button is clicked.
 });
