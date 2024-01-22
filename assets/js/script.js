@@ -13,47 +13,47 @@ $( document ).ready(function() {
             task: "", // [2]
         },
         {
-            hourInt: 01, // [0]
+            hourInt: 1, // [0]
             hour: "1AM", // [1]
             task: "", // [2]
         },
         {
-            hourInt: 02, // [0]
+            hourInt: 2, // [0]
             hour: "2AM", // [1]
             task: "", // [2]
         },
         {
-            hourInt: 03, // [0]
+            hourInt: 3, // [0]
             hour: "3AM", // [1]
             task: "", // [2]
         },
         {
-            hourInt: 04, // [0]
+            hourInt: 4, // [0]
             hour: "4AM", // [1]
             task: "", // [2]
         },
         {
-            hourInt: 05, // [0]
+            hourInt: 5, // [0]
             hour: "5AM", // [1]
             task: "", // [2]
         },
         {
-            hourInt: 06, // [0]
+            hourInt: 6, // [0]
             hour: "6AM", // [1]
             task: "", // [2]
         },
         {
-            hourInt: 07, // [0]
+            hourInt: 7, // [0]
             hour: "7AM", // [1]
             task: "", // [2]
         },
         {
-            hourInt: 08, // [0]
+            hourInt: 8, // [0]
             hour: "8AM", // [1]
             task: "", // [2]
         },
         {
-            hourInt: 09, // [0]
+            hourInt: 9, // [0]
             hour: "9AM", // [1]
             task: "", // [2]
         },
