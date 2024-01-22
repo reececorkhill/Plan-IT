@@ -197,4 +197,16 @@ $( document ).ready(function() {
         };
     }
     futureHour();                                                                                   // Calling the futureHour function.
+
+    function saveTaskEntry() {                                                                      // Function to save the users task to local storage.
+        var clickedButton = $(this);                                                                // The clicked saveBtn.
+        var correspondingTextarea = clickedButton.closest(".row").find("textarea");                 // Finding the textarea in the same row as the clicked button.
+
+        if (correspondingTextarea.val().trim() !== "") {                                            // Checking that the user has entered something in the textarea of the corresponding button.
+            console.log(correspondingTextarea.val());
+        } else {                                                                                    // If the user has not entered anything in the textarea of the corresponding button.
+            console.log("Textarea is empty!");
+        }
+    }
+    $(".saveBtn").click(saveTaskEntry);                                                             // Calling the saveTaskEntry function when a save button is clicked.
 });
