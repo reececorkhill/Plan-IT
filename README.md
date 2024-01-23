@@ -14,7 +14,9 @@ There were a few problems which I faced, which led to the planning of this proje
 - I was going through a lot of paper, frequently 📖
 
 
-The solution to these problems was...
+The solution to these problems was to build an application using JavaScript, Jquery, HTML and CSS which would allow me to see time blocks for my standard working day and add a task for each hour, and save it. When I want to what I have planned for a timeslot, I just click into the box for that hour, update the text and click save and it updates the task. By implementing these features in my code, it has allowed me to manage my time effectively and cut down on my paper use - and it's saved me alot of headaches along the way.
+
+This project has been a great learning experience for me and it's given me the skills to be able to create dynamic web applications that are useful for everyday tasks.
 
 ## Table of Contents
 
@@ -29,7 +31,7 @@ N/A
 
 ## Usage
 
-Test your JavaScript knowledge by playing QuizzyJS, a Timed and Interactive JavaScript Quiz - <a href="https://reececorkhill.github.io/Quizzy-JS/"> here</a>!
+Plan your time efficiently <a href="https://reececorkhill.github.io/Plan-IT/"> here</a>!
 
 ![Screenshot of PlanIT App.](assets/images/.png)
 
