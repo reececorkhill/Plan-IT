@@ -49,20 +49,20 @@ $( document ).ready(function() {
     $("header").append(hourDisplayPara);                                                            // Appending the <p> element to the header.
 
     // Displaying Date
-    var hourDisplayPara = $("<p>");
+    var hourDisplayPara = $("<p>");                                                                 // Setting a variable to create a paragraph element.
     $("#currentDay").text(today.format("[Today is:] dddd[,] MMMM Do"));                             // Getting currentDay element and displaying Day, Month and Date.
     $(".currentHour").text(currentHour.format("[Current hour:] HH[:00]"));                          // Getting currentHour and displaying it as 2-digits with formatting in the currentHour <p> element.
     
     // Timeblocks
     function dailyTimeblocks (hours) {                                                              // Function to display the timeblocks (Passed in workingDayHours array --> hours).
-        var tasksList = JSON.parse(localStorage.getItem("userTasks"));
+        var tasksList = JSON.parse(localStorage.getItem("userTasks"));                              // Get key "userTasks" from localstorage and parse it to the variable - tasksList.
         
-        if (!tasksList) {
-            tasksList = [];
-            for (var i = 9; i <= 17; i++) {
-                tasksList.push({taskTime: i, taskText: ""})
+        if (!tasksList) {                                                                           // Checking if the taskList is falsy or not defined.
+            tasksList = [];                                                                         // If it is falsy or not defined, initialise it as an empty array.
+            for (var i = 9; i <= 17; i++) {                                                         // Iterating from 9 to 17.
+                tasksList.push({taskTime: i, taskText: ""})                                         // Each iteratin pushes an object with taskTime set to current index and taskText set to an empty string.
             };
-            localStorage.setItem("userTasks", JSON.stringify(tasksList));
+            localStorage.setItem("userTasks", JSON.stringify(tasksList));                           // Stores the tasksList in localstorage as a string.
         };
 
         for (var i = 0; i < hours.length; i++) {                                                    // Iterate through the array.
@@ -78,12 +78,12 @@ $( document ).ready(function() {
             var userTask = $("<textarea>");                                                         // Setting a variable to create a textarea.
             userTask.addClass("description col");                                                   // Giving each userTask textarea the class 'description' and 'col'.
             userTask.attr("data-index", hours[i].hourInt);                                          // Giving each textatea the attribute 'data-index' and the value of the current indexes hourInt.
-            userTask.text(tasksList[i].taskText);
+            userTask.text(tasksList[i].taskText);                                                   // Set text content of userTask textarea to the taskText from the corresponding index in tasksList
             timeblockRow.append(userTask);                                                          // Appending userTask textarea to the timeblockRow div.
             
             var saveTask = $("<button><i>");                                                        // Setting a variable to create a button with icon.
             saveTask.addClass("saveBtn col-1 fas fa-save fa-2x");                                   // Giving each save button the class 'saveBtn' and 'col-1' and fontawesome classes for the icon.
-            saveTask.css("color:#ffffff")
+            saveTask.css("color:#ffffff");                                                          // Adding the color white to the icon.
             timeblockRow.append(saveTask);                                                          // Appending saveTask button to the timeblockRow div.
 
             $(".container").append(timeblockRow);                                                   // Appending each timeblockRow div to the timeblocks container.
@@ -134,7 +134,7 @@ $( document ).ready(function() {
         var clickedButton = $(this);                                                                // The clicked saveBtn.
         var correspondingTextarea = clickedButton.closest(".row").find("textarea");                 // Finding the textarea in the same row as the clicked button.
         var existingUserTasks = JSON.parse(localStorage.getItem("userTasks"));                      // Declaring a new variable which gets userTasks from localstorage and parses it.
-        var hourIntIndex = correspondingTextarea.data("index");
+        var hourIntIndex = correspondingTextarea.data("index");                                     // Gets value of the 'data-index' from correspondingTextarea.
 
         if (correspondingTextarea.val().trim() !== "") {                                            // Checking that the user has entered something in the textarea of the corresponding button, removes whitespace.
             var taskText = correspondingTextarea.val();                                             // Declaring a new variable which gets the value of the textarea.
@@ -149,14 +149,14 @@ $( document ).ready(function() {
             existingUserTasks = [];                                                                 // Set existingUserTasks to an empty array.
         };
 
-        for (var i = 0; i < existingUserTasks.length; i++) {                                        // Iterate through the array.
-            if (existingUserTasks[i].taskTime === hourIntIndex) {
-                existingUserTasks.splice(i, 1);
+        for (var i = 0; i < existingUserTasks.length; i++) {                                        // Iterate through the existingUserTasks array.
+            if (existingUserTasks[i].taskTime === hourIntIndex) {                                   // Checking if the taskTime property of current index is strictly equal to the hourIntIndex.
+                existingUserTasks.splice(i, 1);                                                     // If taskTime matches, remove the element at current index.                                                   
             };
         };
 
         var newTasks = [...existingUserTasks, taskListItems];                                       // Creates newTasks array by spreading the elements of existingUserTasks and adding taskListItems to the end.
-        newTasks.sort((a, b) => a.taskTime-b.taskTime);
+        newTasks.sort((a, b) => a.taskTime-b.taskTime);                                             // Sorts array of objects in newTasks based on the taskTime property in ascending order.
         localStorage.setItem("userTasks", JSON.stringify(newTasks));                                // Converts newTasks to a string and stores it in local storage with the key "userTasks".
     }
     $(".saveBtn").click(saveTaskEntry);                                                             // Calling the saveTaskEntry function when a save button is clicked.
