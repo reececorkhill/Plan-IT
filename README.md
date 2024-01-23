@@ -33,7 +33,7 @@ N/A
 
 Plan your time efficiently <a href="https://reececorkhill.github.io/Plan-IT/"> here</a>!
 
-![Screenshot of PlanIT App.](assets/images/.png)
+![Screenshot of PlanIT App.](assets/images/PlanIT-Screenshot.png)
 
 ## Credits
 
