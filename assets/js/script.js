@@ -8,42 +8,6 @@ $( document ).ready(function() {
     var currentHour = dayjs();                                                                      // Variable for current hour which uses dayJS to get current hour.
     var workingDayHours = [                                                                         // Array of objects holding the timeblock hours.
         {
-            hourInt: 0, // [0]
-            hour: "12AM", // [1]
-        },
-        {
-            hourInt: 1, // [0]
-            hour: "1AM", // [1]
-        },
-        {
-            hourInt: 2, // [0]
-            hour: "2AM", // [1]
-        },
-        {
-            hourInt: 3, // [0]
-            hour: "3AM", // [1]
-        },
-        {
-            hourInt: 4, // [0]
-            hour: "4AM", // [1]
-        },
-        {
-            hourInt: 5, // [0]
-            hour: "5AM", // [1]
-        },
-        {
-            hourInt: 6, // [0]
-            hour: "6AM", // [1]
-        },
-        {
-            hourInt: 7, // [0]
-            hour: "7AM", // [1]
-        },
-        {
-            hourInt: 8, // [0]
-            hour: "8AM", // [1]
-        },
-        {
             hourInt: 9, // [0]
             hour: "9AM", // [1]
         },
@@ -79,30 +43,6 @@ $( document ).ready(function() {
             hourInt: 17, // [0]
             hour: "5PM", // [1]
         },
-        {
-            hourInt: 18, // [0]
-            hour: "6PM", // [1]
-        },
-        {
-            hourInt: 19, // [0]
-            hour: "7PM", // [1]
-        },
-        {
-            hourInt: 20, // [0]
-            hour: "8PM", // [1]
-        },
-        {
-            hourInt: 21, // [0]
-            hour: "9PM", // [1]
-        },
-        {
-            hourInt: 22, // [0]
-            hour: "10PM", // [1]
-        },
-        {
-            hourInt: 23, // [0]
-            hour: "11PM", // [1]
-        },
     ];
     var hourDisplayPara = $("<p>");                                                                 // Declaring a variable which will create a <p> element.
     hourDisplayPara.addClass("currentHour");                                                        // Adding the class "currentHour" to the <p> element.
@@ -115,6 +55,16 @@ $( document ).ready(function() {
     
     // Timeblocks
     function dailyTimeblocks (hours) {                                                              // Function to display the timeblocks (Passed in workingDayHours array --> hours).
+        var tasksList = JSON.parse(localStorage.getItem("userTasks"));
+        
+        if (!tasksList) {
+            tasksList = [];
+            for (var i = 9; i <= 17; i++) {
+                tasksList.push({taskTime: i, taskText: ""})
+            };
+            localStorage.setItem("userTasks", JSON.stringify(tasksList));
+        };
+
         for (var i = 0; i < hours.length; i++) {                                                    // Iterate through the array.
 
             var timeblockRow = $("<div>");                                                          // Setting a variable to create a div.
@@ -128,6 +78,7 @@ $( document ).ready(function() {
             var userTask = $("<textarea>");                                                         // Setting a variable to create a textarea.
             userTask.addClass("description col");                                                   // Giving each userTask textarea the class 'description' and 'col'.
             userTask.attr("data-index", hours[i].hourInt);                                          // Giving each textatea the attribute 'data-index' and the value of the current indexes hourInt.
+            userTask.text(tasksList[i].taskText);
             timeblockRow.append(userTask);                                                          // Appending userTask textarea to the timeblockRow div.
             
             var saveTask = $("<button><i>");                                                        // Setting a variable to create a button with icon.
@@ -182,24 +133,30 @@ $( document ).ready(function() {
     function saveTaskEntry() {                                                                      // Function to save the users task to local storage.
         var clickedButton = $(this);                                                                // The clicked saveBtn.
         var correspondingTextarea = clickedButton.closest(".row").find("textarea");                 // Finding the textarea in the same row as the clicked button.
-        var correspondingTime = clickedButton.closest(".row").find("div");                          // Finding the div which holds the time in the same row as the clicked button.
         var existingUserTasks = JSON.parse(localStorage.getItem("userTasks"));                      // Declaring a new variable which gets userTasks from localstorage and parses it.
+        var hourIntIndex = correspondingTextarea.data("index");
 
         if (correspondingTextarea.val().trim() !== "") {                                            // Checking that the user has entered something in the textarea of the corresponding button, removes whitespace.
             var taskText = correspondingTextarea.val();                                             // Declaring a new variable which gets the value of the textarea.
-            console.log(taskText);
-            var taskTime = correspondingTime.text();                                                // Declaring a new variable which gets the text inside of the time div.
-            console.log(taskTime);
+            var taskTime = hourIntIndex;                                                            // Declaring a new variable which gets the text inside of the time div.
             var taskListItems = {taskTime, taskText};                                               // Declaring a new variable which holds the taskTime and taskText in an object.
-            console.log(taskListItems);
         } else {                                                                                    // If the user has not entered anything in the textarea of the corresponding button.
             alert("This task is empty, please enter a task and try again!");                        // Alert to advise the user they must enter something in the text area to save.
+            return;
         };
 
         if (!existingUserTasks) {                                                                   // If existingUserTasks is falsy.
             existingUserTasks = [];                                                                 // Set existingUserTasks to an empty array.
         };
+
+        for (var i = 0; i < existingUserTasks.length; i++) {                                        // Iterate through the array.
+            if (existingUserTasks[i].taskTime === hourIntIndex) {
+                existingUserTasks.splice(i, 1);
+            };
+        };
+
         var newTasks = [...existingUserTasks, taskListItems];                                       // Creates newTasks array by spreading the elements of existingUserTasks and adding taskListItems to the end.
+        newTasks.sort((a, b) => a.taskTime-b.taskTime);
         localStorage.setItem("userTasks", JSON.stringify(newTasks));                                // Converts newTasks to a string and stores it in local storage with the key "userTasks".
     }
     $(".saveBtn").click(saveTaskEntry);                                                             // Calling the saveTaskEntry function when a save button is clicked.
